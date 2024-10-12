@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 
 const languages = [
   { code: 'en', name: 'Inglês'},
@@ -9,6 +10,14 @@ const languages = [
 ]
 
 function App() {
+
+  const [sourceLang, setSourceLang] = useState('pt');
+  const [targetLang, setTargetLang] = useState('en');
+  const [sourceText, setSourceText] = useState('');
+
+  useEffect(() => {
+
+  }, [sourceText]);
   
     return (
       <div className="min-h-screen bg-background flex flex-col">
@@ -24,7 +33,7 @@ function App() {
 
             <div className="flex items-center justify-between p-4 border-b border-gray-200">
 
-              <select className="text-sm text-textColor bg-transparent border-none focus:outiline-none cursor-pointer">                
+              <select value={sourceLang} onChange={ event => setSourceLang(event.target.value) } className="text-sm text-textColor bg-transparent border-none focus:outiline-none cursor-pointer">                
                   {languages.map(lang => (
                     <option key={lang.code} value={lang.code}>{lang.name}</option>
                   ))}               
@@ -47,7 +56,7 @@ function App() {
                 </svg>
               </button>
 
-              <select className="text-sm text-textColor bg-transparent border-none focus:outiline-none cursor-pointer">                
+              <select value={targetLang} onChange={ event => setTargetLang(event.target.value) } className="text-sm text-textColor bg-transparent border-none focus:outiline-none cursor-pointer">                
                   {languages.map(lang => (
                     <option key={lang.code} value={lang.code}>{lang.name}</option>
                   ))}               
@@ -58,7 +67,7 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-2">
 
               <div className="p-4">
-                  <textarea placeholder="Digite seu texto..." className="w-full h-40 text-lg text-textColor bg-transparent resize-none border-none outline-none">
+                  <textarea value={sourceText} onChange={ event => setSourceText(event.target.value) } placeholder="Digite seu texto..." className="w-full h-40 text-lg text-textColor bg-transparent resize-none border-none outline-none">
 
                   </textarea>
               </div>
